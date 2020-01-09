@@ -811,4 +811,12 @@ input[name="bthsize"] {
   text-decoration: none;
   color: #CCC;
 }
+
+.over {
+  border: 3px dashed red;
+}
+
+.dragging {
+  border: 3px dashed yellow;
+}
 /*# sourceMappingURL=index.css.map */

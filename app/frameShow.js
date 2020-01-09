@@ -26,4 +26,4 @@ const animationImage = () => {
   }
 }
 
-export { animationImage }
+export { animationImage, frequencyAnimation }

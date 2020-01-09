@@ -7,6 +7,10 @@
     <title>simple-piskel-clone</title>
     <link rel="stylesheet" href="./index.css">
     <script type="module" src="./app.js" defer></script>
+    <script src="gifshot.js" defer></script>
+    <script src="download.js" defer></script>
+    <script src="UPNG.js" defer></script>
+    <script src="pako.js" defer></script>
 </head>
 <body>
   <div class="app--wrapper">
@@ -97,8 +101,8 @@
           <div class="previews">
             
               <div class="preview--wrapper">
-                <div class="preview preview--active" draggable="true" id="c1">
-                    <canvas id="canvas1" class="canvas1" width="32" height="32"></canvas>
+                <div class="preview preview--active" draggable="true">
+                    <canvas class="canvas1" width="32" height="32"></canvas>
                     <span class="preview--btn number">1</span>
                     <button class="preview--btn delete"></button>
                     <button class="preview--btn copy"></button>

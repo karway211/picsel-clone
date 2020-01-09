@@ -3,11 +3,14 @@ import { mousedownLine, mousemoveLine, mouseupLine } from './app/line.js'
 import { mousedownEraser, mousemoveEraser, mouseupEraser } from './app/eraser.js'
 import { floodFill } from './app/bucket.js'
 import { fillCanvas } from './app/fill.js'
-import { insertFrame, deleteFrame, frameParentAll, cloneFrame, moveFrame } from './app/frames.js'
+import { insertFrame, deleteFrame, frameParentAll, cloneFrame, moveFrame, addId, removeId } from './app/frames.js'
 import { funcLocalStart, getLoalMain } from './app/localSt.js'
 import { valueFPS } from './app/rangefps.js'
 import { animationImage } from './app/frameShow.js'
 import { fullScreenToggle } from './app/fullScreen.js'
+import { framesToImg } from './app/saveGif.js'
+import { imageArrayFunc } from './app/saveUpng.js'
+import { frequencyAnimation } from './app/frameShow.js'
 // localStorage.clear()
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
@@ -32,7 +35,6 @@ let tools = 'pen';
 const inpColor = document.querySelector('.current--color');
 const prevColor = document.querySelector('.prev--color');
 
-
 context.strokeStyle = inpColor.value;
 ctx.strokeStyle = inpColor.value;
 inpColor.addEventListener('change', () => {context.strokeStyle = inpColor.value;}, false);
@@ -44,7 +46,6 @@ document.addEventListener('click', (e) => {
     }
 });
 document.addEventListener('click', clickCanvasSize);
-
 
 const rangeFPS = document.querySelector('.range--fps');
 rangeFPS.addEventListener("input", valueFPS);
@@ -110,8 +111,6 @@ canvas.addEventListener('click', (e) => {
     if (tools === 'allpx') {
         if (e.target.id === 'canvas')  fillCanvas();
     }
-
-
 });
 
 const animatedBtn = document.querySelector('.animated--btn');
@@ -122,7 +121,42 @@ rangeFPS.addEventListener("input", animationImage);
 
 const previewWrapper = document.querySelector('.preview--wrapper');
 previewWrapper.addEventListener('click', cloneFrame);
+previewWrapper.addEventListener('mousedown', (e) => {
+    if (!e.target.classList.contains('step')) return;
+    addId(e);
+});
+previewWrapper.addEventListener('mousemove', (e) => {
+    if (!e.target.classList.contains('step')) return;
+    moveFrame(e);
+});
+previewWrapper.addEventListener('mouseup', (e) => {
+    if (!e.target.classList.contains('step')) return;
+    removeId(e);
+});
 animationImage();
+
+const saveGif = document.querySelector('.gif');
+saveGif.addEventListener('click', () => {
+    gifshot.createGIF({
+        images: framesToImg(),
+        interval: 1 / rangeFPS.value,
+        gifWidth: 250,
+        gifHeight: 250,
+    }, (obj) => {
+        if (!obj.error) {
+            const image = obj.image;
+            download(image, 'myGif.gif', 'gif');
+        }
+    });
+});
+
+const saveApng = document.querySelector('.png');
+saveApng.addEventListener('click', () => {
+    const arrFrequencyAnimation = new Array(imageArrayFunc().length);
+    arrFrequencyAnimation.fill(frequencyAnimation());
+    const imageRes = UPNG.encode(imageArrayFunc(), 250, 250, 0, arrFrequencyAnimation);
+    download(imageRes, 'myApng.apng', 'apng');
+});
 
 export { canvas,
         context,

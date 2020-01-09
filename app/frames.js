@@ -1,4 +1,4 @@
-import { context, previewWrapper } from '../app.js'
+import { context } from '../app.js'
 
 const frameNumber = () => {
     const frames = document.querySelectorAll('.preview');
@@ -92,18 +92,66 @@ const frameParentAll = (e) => {
 
 
 
-
-
-
-
-
-
-function moveFrame(e) {
+const addId = (e) => {
     if (!e.target.classList.contains('step')) return;
-    
-    console.log(e);
-   
+    const parentElem = e.target.parentNode.parentNode;
+    const allChild = parentElem.querySelectorAll('.preview');
+    let index = 0;
+    allChild.forEach((elem) => {
+        elem.id = `c${index++}`;
+        // console.log(elem.id)
+    });
 }
-  
 
-export { insertFrame, deleteFrame, frameParentAll, cloneFrame, moveFrame }
+const removeId = (e) => {
+    if (!e.target.classList.contains('step')) return;
+    const parentElem = e.target.parentNode.parentNode;
+    const allChild = parentElem.querySelectorAll('.preview');
+    allChild.forEach((elem) => {
+        elem.removeAttribute('id');
+    });
+}
+
+const moveFrame = (elem) => {
+    if (!elem.target.classList.contains('step')) return;
+    document.querySelectorAll('.preview').forEach(e => {
+        e.draggable = true;
+        e.ondragstart = e => {
+          e.dataTransfer.setData("id", e.target.id);
+          e.target.classList.add('dragging');
+        }
+        e.ondragover = e => {
+          let old = document.querySelector('.over');
+          old && old.classList.remove('over')
+          e.target.classList.add('over');
+          e.preventDefault();
+        };
+        e.ondrop = e => {
+          let old = document.querySelector('.dragging');
+          old && old.classList.remove('dragging')
+          old = document.querySelector('.over');
+          old && old.classList.remove('over');
+          let fromEl = document.querySelector('#'+e.dataTransfer.getData('id'));
+          const vCanvas = e.target.parentNode.querySelector('canvas');
+          const ctxV = vCanvas.getContext('2d');
+          const imageDataV = vCanvas.toDataURL();
+          const fromElCanv = fromEl.querySelector('canvas');
+          const ctxFromElCanv = fromElCanv.getContext('2d');
+          const imageDataFromEl = fromElCanv.toDataURL();
+          const imgV = new Image();
+          imgV.src = imageDataFromEl;
+          ctxV.clearRect(0, 0, vCanvas.width, vCanvas.height);
+          imgV.onload = function onl() {
+            ctxV.drawImage(imgV, 0, 0, vCanvas.width, vCanvas.height);
+          }
+          const imgRromEl = new Image();
+          imgRromEl.src = imageDataV;
+          ctxFromElCanv.clearRect(0, 0, fromElCanv.width, fromElCanv.height);
+          imgRromEl.onload = function onl() {
+            ctxFromElCanv.drawImage(imgRromEl, 0, 0, fromElCanv.width, fromElCanv.height);
+          }
+        };
+      })
+}
+
+export { insertFrame, deleteFrame, frameParentAll, cloneFrame, moveFrame, addId, removeId }
