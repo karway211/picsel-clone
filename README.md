@@ -1,1 +1,1 @@
-# picsel-clone
+# piskel-clone
