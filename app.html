@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>simple-piskel-clone</title>
+    <link rel="stylesheet" href="./index.css">
+    <script type="module" src="./app.js" defer></script>
+</head>
+<body>
+  <div class="app--wrapper">
+    <header class="header">
+      <div class="wrapper navbar--wrapper">
+        <nav class="nav">
+          <a href="">
+            <img src="./assets/images/logo.png" alt="logo" width="113" height="32" class="logo">
+          </a>
+          <h1 class="h1">New Piskel</h1>
+          <div class="nawbar--buttons">
+            <a href="app.html" target="_blank">
+              <button class="create--bth">Create Sprite</button>
+            </a>
+            <button class="signin--btn">
+              Sign in
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="main">
+      <div class="wrapper">
+        <div class="toolkit--wrapper">
+          <div class="tools">
+            <div class="sizespx">
+              <label class="radio">
+                <input type="radio" name="sizepx" value="1l" checked>
+                <span></span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="sizepx" value="2l">
+                <span></span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="sizepx" value="3l">
+                <span></span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="sizepx" value="4l">
+                <span></span>
+              </label>
+              <div class="tip">
+                <span>Pen size<br>from 1 to 4 pixels</span>
+              </div>
+            </div>
+            <label class="label pen">
+              <input type="radio" name="tool" value="pen" checked>
+              <span></span>
+              <div class="tooltip--wrapper">
+                <span>Pen tool<span class="tooltip--shortcut">(P)</span></span>
+              </div>
+            </label>
+            <label class="label stroke">
+              <input type="radio" name="tool" value="stroke">
+              <span></span>
+              <div class="tooltip--wrapper">
+                <span>Stroke tool</span><span class="tooltip--shortcut">(L)</span>
+              </div>
+            </label>
+            <label class="label bucket">
+              <input type="radio" name="tool" value="bucket">
+              <span></span>
+              <div class="tooltip--wrapper">
+                <span>Paint bucket tool</span><span class="tooltip--shortcut">(B)</span>
+              </div>
+            </label>
+            <label class="label allpx">
+              <input type="radio" name="tool" value="allpx">
+              <span></span>
+              <div class="tooltip--wrapper">
+                <span>Paint all pixels of the same color</span><span class="tooltip--shortcut">(A)</span>
+              </div>
+            </label>
+            <label class="label eraser">
+              <input type="radio" name="tool" value="eraser">
+              <span></span>
+              <div class="tooltip--wrapper">
+                <span>Eraser tool</span><span class="tooltip--shortcut">(E)</span>
+              </div>
+            </label>
+            <div class="colors">
+              <input type="color" class="current--color" value="#000000">
+              <div class="rotate"></div>
+              <input type="color" class="prev--color" value="#ff0000">
+            </div>
+          </div>
+          <div class="previews">
+            
+              <div class="preview--wrapper">
+                <div class="preview preview--active" draggable="true" id="c1">
+                    <canvas id="canvas1" class="canvas1" width="32" height="32"></canvas>
+                    <span class="preview--btn number">1</span>
+                    <button class="preview--btn delete"></button>
+                    <button class="preview--btn copy"></button>
+                    <button class="preview--btn step"></button>
+                </div>
+              </div>
+            
+            <button class="add--frame">
+              <p>Add new frame</p>
+            </button>
+          </div>
+        </div>
+        <div class="wrapper--canvas">
+          <canvas id="canvas" class="canvas canvas--active" width="32" height="32"></canvas>
+        </div>
+        <div class="animated--container">
+          <div class="animated--wrapper">
+             <canvas id="animated" class="animated" width="32" height="32"></canvas>
+             <button class="animated--btn"></button>
+          </div>
+          <div class="change--fps">
+            <span class="display--number">12</span>
+            <span class="display--fps">FPS</span>
+            <input class="range--fps" type="range" min="0" max="24" step="1" value="12">
+          </div>
+          <div class="chenge--canvas">
+            <label class="label bthsize32">
+              <input type="radio" name="bthsize" value="1" checked>
+              <span>32x32</span>
+            </label>
+            <label class="label bthsize64">
+              <input type="radio" name="bthsize" value="2">
+              <span>64x64</span>
+            </label>
+            <label class="label bthsize128">
+              <input type="radio" name="bthsize" value="3">
+              <span>128x128</span>
+            </label>
+          </div>
+          <div class="saveimage">
+            <button class="save--bth gif">.gif</button>
+            <button class="save--bth png">.apng</button>
+          </div>
+      </divcl>
+
+    </main>
+
+  </div>
+</body>
+</html>
