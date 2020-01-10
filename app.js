@@ -50,6 +50,43 @@ document.addEventListener('click', clickCanvasSize);
 const rangeFPS = document.querySelector('.range--fps');
 rangeFPS.addEventListener("input", valueFPS);
 
+document.addEventListener('keydown', (e) => {
+    const toolsAll = document.querySelectorAll('.tool--bth');
+    const keyP = 'KeyP';
+    const keyL = 'KeyL';
+    const keyB = 'KeyB';
+    const keyA = 'KeyA';
+    const keyE = 'KeyE';
+
+    toolsAll.forEach((el) => {
+        if (e.code === keyP) {
+            tools = 'pen';
+            canvasTop.style.display = 'none';
+            if (el.value === 'pen') el.checked = true;
+        }
+        if (e.code === keyL) {
+            tools = 'stroke';
+            canvasTop.style.display = 'block';
+            if (el.value === 'stroke') el.checked = true;
+        }
+        if (e.code === keyB) {
+            tools = 'bucket';
+            canvasTop.style.display = 'none';
+            if (el.value === 'bucket') el.checked = true;
+        }
+        if (e.code === keyA) {
+            tools = 'allpx';
+            canvasTop.style.display = 'none';
+            if (el.value === 'allpx') el.checked = true;
+        }
+        if (e.code === keyE) {
+            tools = 'eraser';
+            canvasTop.style.display = 'none';
+            if (el.value === 'eraser') el.checked = true;
+        }
+    })  
+});
+
 document.addEventListener('click', (e) => {
     if (e.target.value === 'pen') {
         tools = 'pen';
@@ -166,4 +203,4 @@ export { canvas,
         flagN,
         rangeFPS,
         previewWrapper
-    }
+}
